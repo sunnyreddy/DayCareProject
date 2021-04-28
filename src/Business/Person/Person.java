@@ -10,25 +10,26 @@ package Business.Person;
  * @author medas
  */
 public class Person {
-    private int personId;
+    private String personId;
     private int age;
     private String firstName;
     private String lastName;
     private String description;
 
-    public Person(int personId, int age, String firstName, String lastName) {
+    public Person(String personId, int age, String firstName, String lastName) {
         super();
         this.personId = personId;
         this.age = age;
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public int getPersonId() {
+    public Person(){
+    }
+    public String getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(String personId) {
         this.personId = personId;
     }
 

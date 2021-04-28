@@ -4,6 +4,8 @@
  */
 package userInterface;
 
+import Business.Customer.Customer;
+import Encrypt.Password.PasswordUtils;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -11,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userInterface.Customer.ManageCustomerWorkAreaPanel;
 
 import userInterface.Employee.EmployeeWorkAreaJPanel;
 /**
@@ -22,9 +25,10 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-
+    private Customer customer;
     public MainJFrame() {
         initComponents();
+        customer = new Customer();
         this.setSize(1440, 900);
     }
 
@@ -212,7 +216,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         String userName = userNameJTextField.getText();
         // Get Password
@@ -227,7 +231,18 @@ public class MainJFrame extends javax.swing.JFrame {
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         } else {
-            flag = false;
+            for(Customer cus :customer.getDetails()){
+                 boolean passwordMatch = PasswordUtils.verifyUserPassword(password, cus.getPassword(), cus.getSaltValue());
+               if(userName.equals(cus.getUserName()) && passwordMatch )
+                {
+                   ManageCustomerWorkAreaPanel adminPanel=new ManageCustomerWorkAreaPanel(userProcessContainer,cus.getUserName());
+                    userProcessContainer.add("",adminPanel);
+                    CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+                    layout.next(userProcessContainer);
+                    flag = true;
+
+                }
+            }
         }
             
         // if login is failed

@@ -17,7 +17,11 @@ public class Employee extends Person {
     private String password;
     private Date employedDate;
     private int salary;
+<<<<<<< HEAD
+    public Employee(String personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password) {
+=======
     public Employee(int personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password) {
+>>>>>>> 54d6e885e73281f562dbb0f00aaeef4ba31e3033
         super(personId, age, firstName, lastName);
         this.employedDate = employedDate;
         this.salary = salary;
