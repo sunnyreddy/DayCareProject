@@ -5,6 +5,8 @@
 package userInterface;
 
 import Business.Customer.Customer;
+import Business.Employee.Employee;
+import Business.Employee.EmployeeDirectory;
 import Encrypt.Password.PasswordUtils;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -26,9 +28,11 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private Customer customer;
+    private EmployeeDirectory empDir;
     public MainJFrame() {
         initComponents();
         customer = new Customer();
+        empDir = new EmployeeDirectory(); 
         this.setSize(1440, 900);
     }
 
@@ -223,14 +227,15 @@ public class MainJFrame extends javax.swing.JFrame {
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray); 
         boolean flag = false;
-        if(userName.equals("emp") && password.equals("emp"))
+        if(userName.equals("admin") && password.equals("admin"))
         {
-            flag = true;
-            EmployeeWorkAreaJPanel employeePanel = new EmployeeWorkAreaJPanel(userProcessContainer);
-            userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
-            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-        } else {
+//            flag = true;
+//            AdminWorkAreaJPanel employeePanel = new AdminWorkAreaJPanel(userProcessContainer);
+//            userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
+//            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+//            layout.next(userProcessContainer);
+        }
+        else {
             for(Customer cus :customer.getDetails()){
                  boolean passwordMatch = PasswordUtils.verifyUserPassword(password, cus.getPassword(), cus.getSaltValue());
                if(userName.equals(cus.getUserName()) && passwordMatch )
@@ -241,6 +246,17 @@ public class MainJFrame extends javax.swing.JFrame {
                     layout.next(userProcessContainer);
                     flag = true;
 
+                }
+            }
+            
+            for(Employee emp : empDir.getAllEmployeesDetails()){
+                if(userName.equals(emp.getUserName()) && password.equals(emp.getPassword()))
+                {
+                    flag = true;
+                    EmployeeWorkAreaJPanel employeePanel = new EmployeeWorkAreaJPanel(userProcessContainer);
+                    userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
+                    CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+                    layout.next(userProcessContainer);
                 }
             }
         }
