@@ -7,15 +7,13 @@ package Business.Customer;
 
 import Business.Immunization.Vaccine;
 import Business.Person.Person;
-<<<<<<< HEAD
 import Encrypt.Password.PasswordUtils;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-=======
->>>>>>> 54d6e885e73281f562dbb0f00aaeef4ba31e3033
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +26,6 @@ public class Customer extends Person {
     private String userName;
     private String password;
     private List<Vaccine> vaccinesList;
-<<<<<<< HEAD
     private String saltValue;
     private Date registrationDate;
     public String getUserName() {
@@ -73,39 +70,12 @@ public class Customer extends Person {
     public Customer(){
     }
     public Customer(String personId, int age, String firstName, String lastName, Date registrationDate, String userName, String password, String salt) {
-=======
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-    private Date registrationDate;
-    public Customer(int personId, int age, String firstName, String lastName, Date registrationDate, String userName, String password) {
->>>>>>> 54d6e885e73281f562dbb0f00aaeef4ba31e3033
         super(personId, age, firstName, lastName);
         this.registrationDate = registrationDate;
         this.userName = userName;
         this.password = password;
         this.vaccinesList = new ArrayList<>();
-<<<<<<< HEAD
         this.saltValue = salt;
     }
    public List<Customer>  getDetails(){
@@ -130,8 +100,7 @@ public class Customer extends Person {
                 empDetails.add(Health);
             }
           return empDetails;
-=======
->>>>>>> 54d6e885e73281f562dbb0f00aaeef4ba31e3033
+
     }
     
     

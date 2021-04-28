@@ -140,17 +140,11 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
          while(cursor.hasNext()){
              Object[] row = new Object[model.getColumnCount()];
              DBObject obj = cursor.next();
-<<<<<<< HEAD
              row[0] = obj.get("_id");
              row[1] = obj.get("userName");
              row[2] = obj.get("age");
              row[3] = obj.get("registrationDate");
-=======
-             row[0] = obj.get("firstName");
-             row[1] = obj.get("lastName");
-             row[2] = obj.get("userName");
-             row[3] = obj.get("age");
->>>>>>> 54d6e885e73281f562dbb0f00aaeef4ba31e3033
+
              model.addRow(row);
          }  
     }
