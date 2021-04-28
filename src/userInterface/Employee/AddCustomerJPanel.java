@@ -5,9 +5,23 @@
  */
 package userInterface.Employee;
 
+import Business.Immunization.Vaccine;
+import com.mongodb.BasicDBList;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,6 +54,31 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        txtInFirstName = new javax.swing.JTextField();
+        txtInLastName = new javax.swing.JTextField();
+        txtInAge = new javax.swing.JTextField();
+        txtInDate = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnAddCust = new javax.swing.JButton();
+        txtInUserName = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtInPassword = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jCbPolio = new javax.swing.JComboBox<>();
+        jCbChickenPox = new javax.swing.JComboBox<>();
+        jCbSmallPox = new javax.swing.JComboBox<>();
+        jCbcovid = new javax.swing.JComboBox<>();
+        jCbCold = new javax.swing.JComboBox<>();
+        jCbMeasles = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -54,16 +93,109 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("First Name");
+
+        jLabel3.setText("Last Name");
+
+        jLabel4.setText("Age");
+
+        jLabel5.setText("Registration Date");
+
+        btnAddCust.setText("Submit");
+        btnAddCust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCustActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("UserName");
+
+        jLabel7.setText("Password");
+
+        jCbPolio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Completed" }));
+
+        jCbChickenPox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Completed" }));
+
+        jCbSmallPox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Completed" }));
+
+        jCbcovid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Completed" }));
+
+        jCbCold.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Completed" }));
+
+        jCbMeasles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Completed" }));
+
+        jLabel8.setText("Polio");
+
+        jLabel9.setText("Chicken Pox");
+
+        jLabel10.setText("Small Pox");
+
+        jLabel11.setText("Covid");
+
+        jLabel12.setText("Cold");
+
+        jLabel13.setText("Measles");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(327, 327, 327))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(txtInAge, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtInLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(26, 26, 26)
+                                .addComponent(txtInFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtInDate, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtInUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtInPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCbPolio, 0, 163, Short.MAX_VALUE)
+                            .addComponent(jCbChickenPox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCbSmallPox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCbcovid, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCbCold, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCbMeasles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(124, 124, 124))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAddCust)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +204,45 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jCbPolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jCbChickenPox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jCbSmallPox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jCbcovid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jCbCold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtInPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCbMeasles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(btnAddCust)
+                .addGap(38, 38, 38))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -87,9 +257,94 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnAddCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustActionPerformed
+        // TODO add your handling code here:
+        String cust_fname = txtInFirstName.getText();
+        String cust_lname = txtInLastName.getText();
+        String userName = txtInUserName.getText();
+        String password = txtInPassword.getText();
+        int age = Integer.parseInt(txtInAge.getText());
+        String regis_Date = txtInDate.getText();
+        Date date = new Date(regis_Date);
+        List<Vaccine> vaccineList = new ArrayList<>();
+        String status1 = jCbPolio.getSelectedItem().toString();
+        Vaccine polio = new Vaccine("Polio", status1);
+        vaccineList.add(polio);
+        String status2 = jCbChickenPox.getSelectedItem().toString();
+        Vaccine chickenPox = new Vaccine("Chicken Pox", status2);
+        vaccineList.add(chickenPox);
+        String status3 = jCbSmallPox.getSelectedItem().toString();
+        Vaccine smallPox = new Vaccine("Small Pox", status3);
+        vaccineList.add(smallPox);
+        String status4 = jCbcovid.getSelectedItem().toString();
+        Vaccine covid = new Vaccine("Covid", status4);
+        vaccineList.add(covid);
+        String status5 = jCbCold.getSelectedItem().toString();
+        Vaccine cold = new Vaccine("Cold", status5);
+        vaccineList.add(cold);
+        String status6 = jCbMeasles.getSelectedItem().toString();
+        Vaccine measels = new Vaccine("Measels", status6);
+        vaccineList.add(measels);
+        
+        // mongodb list
+        List<Object> studentsDBList = new BasicDBList();
+        for(Vaccine v : vaccineList) {
+            DBObject studentDBObject = new BasicDBObject();
+            studentDBObject.put("vaccineName", v.getName());
+            studentDBObject.put("vaccineStatus", v.getStatus());
+            studentsDBList.add(studentDBObject);
+        }
+        try {
+            MongoClient mongoClient = new MongoClient("localhost", 27017); 
+            DB db = mongoClient.getDB("TestDB");
+            DBCollection userCollection = db.getCollection("Customers");
+            BasicDBObject bO = new BasicDBObject();
+            int count = (int)userCollection.count();
+            String cus_id = "C00"+count;
+            bO.put("_id",cus_id);
+            bO.put("firstName", cust_fname);
+            bO.put("lastName", cust_lname);
+            bO.put("userName", userName);
+            bO.put("password", password);
+            bO.put("age", age);
+            bO.put("registrationDate", date);
+            bO.put("vaccineInfo", studentsDBList);
+            userCollection.insert(bO);
+            JOptionPane.showMessageDialog(null, "Created Account for Customer Successfully");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Failed to add Try Again");
+        }
+    }//GEN-LAST:event_btnAddCustActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddCust;
     private javax.swing.JButton btnBack;
+    private javax.swing.JComboBox<String> jCbChickenPox;
+    private javax.swing.JComboBox<String> jCbCold;
+    private javax.swing.JComboBox<String> jCbMeasles;
+    private javax.swing.JComboBox<String> jCbPolio;
+    private javax.swing.JComboBox<String> jCbSmallPox;
+    private javax.swing.JComboBox<String> jCbcovid;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField txtInAge;
+    private javax.swing.JTextField txtInDate;
+    private javax.swing.JTextField txtInFirstName;
+    private javax.swing.JTextField txtInLastName;
+    private javax.swing.JTextField txtInPassword;
+    private javax.swing.JTextField txtInUserName;
     // End of variables declaration//GEN-END:variables
+
 }

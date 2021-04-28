@@ -13,12 +13,47 @@ import java.util.Date;
  * @author medas
  */
 public class Employee extends Person {
-    
+    private String userName;
+    private String password;
     private Date employedDate;
     private int salary;
-    public Employee(int personId, int age, String firstName, String lastName, Date employedDate, int salary) {
+    public Employee(int personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password) {
         super(personId, age, firstName, lastName);
         this.employedDate = employedDate;
+        this.salary = salary;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Date getEmployedDate() {
+        return employedDate;
+    }
+
+    public void setEmployedDate(Date employedDate) {
+        this.employedDate = employedDate;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
         this.salary = salary;
     }
     

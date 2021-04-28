@@ -6,6 +6,11 @@
 package userInterface.Employee;
 
 import Business.Employee.Employee;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -25,6 +30,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     ManageCustomerJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        populateTable();
     }
 
     /**
@@ -121,4 +127,24 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCustomer;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblCustomer.getModel();
+        model.setRowCount(0);
+         MongoClient mongoClient = new MongoClient("localhost", 27017); 
+         DB db = mongoClient.getDB("TestDB");
+         DBCollection userCollection = db.getCollection("Customers");
+         DBCursor cursor = null;
+         cursor = userCollection.find();
+         model.setRowCount(0);
+         while(cursor.hasNext()){
+             Object[] row = new Object[model.getColumnCount()];
+             DBObject obj = cursor.next();
+             row[0] = obj.get("firstName");
+             row[1] = obj.get("lastName");
+             row[2] = obj.get("userName");
+             row[3] = obj.get("age");
+             model.addRow(row);
+         }  
+    }
 }
