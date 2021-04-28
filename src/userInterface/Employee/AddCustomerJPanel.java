@@ -6,6 +6,7 @@
 package userInterface.Employee;
 
 import Business.Immunization.Vaccine;
+import Encrypt.Password.PasswordUtils;
 import com.mongodb.BasicDBList;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -229,11 +230,12 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
                     .addComponent(jCbcovid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtInUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jCbCold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtInUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCbCold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12)))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -259,10 +261,12 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
 
     private void btnAddCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustActionPerformed
         // TODO add your handling code here:
+        String salt = PasswordUtils.getSalt(30); 
         String cust_fname = txtInFirstName.getText();
         String cust_lname = txtInLastName.getText();
         String userName = txtInUserName.getText();
-        String password = txtInPassword.getText();
+        String pwd = txtInPassword.getText();
+        String password = PasswordUtils.generateSecurePassword(pwd, salt);
         int age = Integer.parseInt(txtInAge.getText());
         String regis_Date = txtInDate.getText();
         Date date = new Date(regis_Date);
@@ -308,6 +312,7 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             bO.put("password", password);
             bO.put("age", age);
             bO.put("registrationDate", date);
+            bO.put("Saltvalue", salt);
             bO.put("vaccineInfo", studentsDBList);
             userCollection.insert(bO);
             JOptionPane.showMessageDialog(null, "Created Account for Customer Successfully");

@@ -65,7 +65,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer ID", "Name", "Vaccines", "Upcoming"
+                "Customer ID", "Name", "Age", "Registration Date", "Upcoming"
             }
         ));
         jScrollPane1.setViewportView(tblCustomer);
@@ -140,10 +140,11 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
          while(cursor.hasNext()){
              Object[] row = new Object[model.getColumnCount()];
              DBObject obj = cursor.next();
-             row[0] = obj.get("firstName");
-             row[1] = obj.get("lastName");
-             row[2] = obj.get("userName");
-             row[3] = obj.get("age");
+             row[0] = obj.get("_id");
+             row[1] = obj.get("userName");
+             row[2] = obj.get("age");
+             row[3] = obj.get("registrationDate");
+
              model.addRow(row);
          }  
     }

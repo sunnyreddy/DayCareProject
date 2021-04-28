@@ -17,7 +17,8 @@ public class Employee extends Person {
     private String password;
     private Date employedDate;
     private int salary;
-    public Employee(int personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password) {
+    public Employee(String personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password) {
+
         super(personId, age, firstName, lastName);
         this.employedDate = employedDate;
         this.salary = salary;
