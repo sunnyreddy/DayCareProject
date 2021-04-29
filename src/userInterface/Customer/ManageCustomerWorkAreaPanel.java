@@ -85,7 +85,7 @@ public class ManageCustomerWorkAreaPanel extends javax.swing.JPanel {
         DBCursor cursor = null;
         cursor = userCollection.find();
         model.setRowCount(0);
-        
+        boolean b = false;
         while(cursor.hasNext()){
             Object[] row = new Object[model.getColumnCount()];
             DBObject obj = cursor.next();
@@ -98,16 +98,19 @@ public class ManageCustomerWorkAreaPanel extends javax.swing.JPanel {
                     vaccineName = object.get("vaccineName").toString();
                     row[1] = vaccineName;   
                     row[2] = vaccineStatus;
+                    
                     vaccineDate = object.get("vaccineDate")!=null?object.get("vaccineDate").toString():"";
                     row[3] = vaccineDate;
-                    
+                    Date today = new Date();
+                    if(!vaccineDate.equals("")&&new Date(vaccineDate).before(today)&&vaccineStatus.equals("Pending")) {
+                        b=true;
+                    }
                     model.addRow(row);
                 }                
             }
         }
         if(flag){
-            Date today = new Date();
-            if(new Date(vaccineDate).before(today)) {
+            if(b){
             JOptionPane.showMessageDialog(null, "Some of your vaccinations are due today. Please get vaccinated soon");
         }
         }

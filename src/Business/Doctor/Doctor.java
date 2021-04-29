@@ -86,7 +86,7 @@ public class Doctor extends Person {
                 String lastName = obj.get("lastName").toString();
                 userName = obj.get("userName").toString();
                 password = obj.get("password").toString();
-                saltValue = obj.get("saltValue")!=null?obj.get("saltValue").toString():PasswordUtils.getSalt(30);
+                saltValue = obj.get("Saltvalue")!=null?obj.get("Saltvalue").toString():PasswordUtils.getSalt(30);
                 Doctor Health= new Doctor(personId,45,firstName,lastName,userName,password,saltValue);
                 empDetails.add(Health);
             }

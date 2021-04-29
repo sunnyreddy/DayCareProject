@@ -7,6 +7,7 @@ package userInterface.Admin;
 
 import Business.Employee.Employee;
 import Business.Immunization.Vaccine;
+import Encrypt.Password.PasswordUtils;
 import com.mongodb.BasicDBList;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -225,16 +226,17 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
 
     private void btnAddCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustActionPerformed
         // TODO add your handling code here:
+        String salt = PasswordUtils.getSalt(30);
         String emp_fname = txtInFirstName.getText();
         String emp_lname = txtInLastName.getText();
         String userName = txtInUserName.getText();
-        String password = txtInPassword.getText();
+        String pwd = txtInPassword.getText();
         int age = Integer.parseInt(txtInAge.getText());
         String empl_Date = txtInDate.getText();
         Date date = new Date(empl_Date);
         int id = Integer.parseInt(txtId.getText());
         int salary = Integer.parseInt(txtSalary.getText());
-        
+        String password = PasswordUtils.generateSecurePassword(pwd, salt);
         
 //        Employee employee = new Employee(id, age, emp_fname, emp_lname, date, salary, userName, password);
         
@@ -274,9 +276,8 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
             DB db = mongoClient.getDB("TestDB");
             DBCollection userCollection = db.getCollection("Employees");
             BasicDBObject b1 = new BasicDBObject();
-            int count = (int)userCollection.count();
-            String emp_id = "E00"+count;
-            b1.put("_id",emp_id);
+//            int count = (int)userCollection.count();
+            b1.put("id",id);
             b1.put("firstName", emp_fname);
             b1.put("lastName", emp_lname);
             b1.put("userName", userName);
