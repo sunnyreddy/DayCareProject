@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Business.Customer;
+package Business.Doctor;
 
+import Business.Customer.Customer;
 import Business.Immunization.Vaccine;
 import Business.Person.Person;
 import Encrypt.Password.PasswordUtils;
@@ -13,21 +9,25 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
- * @author medas
+ * @author tejaswi
  */
-public class Customer extends Person {
+public class Doctor extends Person {
     private String userName;
     private String password;
-    private List<Vaccine> vaccinesList;
+    private List<Customer> customersList;
     private String saltValue;
-    private Date registrationDate;
     public String getUserName() {
         return userName;
     }
@@ -44,21 +44,15 @@ public class Customer extends Person {
         this.password = password;
     }
 
-    public Date getRegistrationDate() {
-        return registrationDate;
+    public List<Customer> getCustomersList() {
+        return customersList;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setCustomersList(List<Customer> customersList) {
+        this.customersList = customersList;
     }
 
-    public List<Vaccine> getVaccinesList() {
-        return vaccinesList;
-    }
-
-    public void setVaccinesList(List<Vaccine> vaccinesList) {
-        this.vaccinesList = vaccinesList;
-    }
+   
 
     public String getSaltValue() {
         return saltValue;
@@ -67,27 +61,21 @@ public class Customer extends Person {
     public void setSaltValue(String saltValue) {
         this.saltValue = saltValue;
     }
-    public Customer(){
+    public Doctor(){
     }
-    
-    public Customer(String personId, int age, String firstName, String lastName){
-        super(personId, age, firstName, lastName);
-    }
-    
-    public Customer(String personId, int age, String firstName, String lastName, Date registrationDate, String userName, String password, String salt) {
+    public Doctor(String personId, int age, String firstName, String lastName, String userName, String password, String salt) {
 
         super(personId, age, firstName, lastName);
-        this.registrationDate = registrationDate;
         this.userName = userName;
         this.password = password;
-        this.vaccinesList = new ArrayList<>();
+        this.customersList = new ArrayList<>();
         this.saltValue = salt;
     }
-   public List<Customer>  getDetails(){
-       List<Customer> empDetails = new ArrayList();
+   public List<Doctor>  getDetails(){
+       List<Doctor> empDetails = new ArrayList();
             MongoClient mongoClient = new MongoClient("localhost", 27017); 
          DB db = mongoClient.getDB("TestDB");
-         DBCollection userCollection = db.getCollection("Customers");
+         DBCollection userCollection = db.getCollection("Doctors");
          DBCursor cursor = null;
          cursor = userCollection.find();
          
@@ -96,12 +84,10 @@ public class Customer extends Person {
                 String personId = obj.get("_id").toString();
                 String firstName = obj.get("firstName").toString();
                 String lastName = obj.get("lastName").toString();
-                Date regDate = (Date)obj.get("registrationDate");
                 userName = obj.get("userName").toString();
                 password = obj.get("password").toString();
-                int age =  (int)obj.get("age");
-                saltValue = obj.get("Saltvalue")!=null?obj.get("Saltvalue").toString():PasswordUtils.getSalt(30);
-                Customer Health= new Customer(personId,age,firstName,lastName,regDate,userName,password,saltValue);
+                saltValue = obj.get("saltValue")!=null?obj.get("saltValue").toString():PasswordUtils.getSalt(30);
+                Doctor Health= new Doctor(personId,45,firstName,lastName,userName,password,saltValue);
                 empDetails.add(Health);
             }
           return empDetails;

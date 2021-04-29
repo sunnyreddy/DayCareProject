@@ -5,6 +5,7 @@
 package userInterface;
 
 import Business.Customer.Customer;
+import Business.Doctor.Doctor;
 import Business.Employee.Employee;
 import Business.Employee.EmployeeDirectory;
 import Encrypt.Password.PasswordUtils;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userInterface.Admin.AdminWorkAreaJPanel;
 import userInterface.Customer.ManageCustomerWorkAreaPanel;
+import userInterface.Doctor.DoctorWorkAreaPanel;
 
 import userInterface.Employee.EmployeeWorkAreaJPanel;
 /**
@@ -29,10 +31,12 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private Customer customer;
+    private Doctor doctor;
     private EmployeeDirectory empDir;
     public MainJFrame() {
         initComponents();
         customer = new Customer();
+        doctor = new Doctor();
         empDir = new EmployeeDirectory(); 
         this.setSize(1440, 900);
     }
@@ -260,8 +264,52 @@ public class MainJFrame extends javax.swing.JFrame {
                     layout.next(userProcessContainer);
                 }
             }
+            for(Doctor doct :doctor.getDetails()){
+                 boolean passwordMatch = PasswordUtils.verifyUserPassword(password, doct.getPassword(), doct.getSaltValue());
+               if(userName.equals(doct.getUserName()) && passwordMatch )
+                {
+                   DoctorWorkAreaPanel adminPanel=new DoctorWorkAreaPanel(userProcessContainer,doct.getPersonId(),doct.getUserName());
+                    userProcessContainer.add("",adminPanel);
+                    CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+                    layout.next(userProcessContainer);
+                    flag = true;
+
+                }
+            }
         }
-            
+//        if(userName.equals("emp") && password.equals("emp"))
+//        {
+//            flag = true;
+//            EmployeeWorkAreaJPanel employeePanel = new EmployeeWorkAreaJPanel(userProcessContainer);
+//            userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
+//            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+//            layout.next(userProcessContainer);
+//        } else {
+//            for(Customer cus :customer.getDetails()){
+//                 boolean passwordMatch = PasswordUtils.verifyUserPassword(password, cus.getPassword(), cus.getSaltValue());
+//               if(userName.equals(cus.getUserName()) && passwordMatch )
+//                {
+//                   ManageCustomerWorkAreaPanel adminPanel=new ManageCustomerWorkAreaPanel(userProcessContainer,cus.getUserName());
+//                    userProcessContainer.add("",adminPanel);
+//                    CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+//                    layout.next(userProcessContainer);
+//                    flag = true;
+//
+//                }
+//            }
+//            for(Doctor doct :doctor.getDetails()){
+//                 boolean passwordMatch = PasswordUtils.verifyUserPassword(password, doct.getPassword(), doct.getSaltValue());
+//               if(userName.equals(doct.getUserName()) && passwordMatch )
+//                {
+//                   DoctorWorkAreaPanel adminPanel=new DoctorWorkAreaPanel(userProcessContainer,doct.getPersonId(),doct.getUserName());
+//                    userProcessContainer.add("",adminPanel);
+//                    CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+//                    layout.next(userProcessContainer);
+//                    flag = true;
+//
+//                }
+//            }
+//        } 
         // if login is failed
         if(!flag){
             JOptionPane.showMessageDialog(null, "Error Invalid credentials");

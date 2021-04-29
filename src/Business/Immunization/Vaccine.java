@@ -12,10 +12,12 @@ package Business.Immunization;
 public class Vaccine {
     private String name;
     private String status;
+    private String date;
 
-    public Vaccine(String name, String status) {
+    public Vaccine(String name, String status,String date) {
         this.name = name;
         this.status = status;//To change body of generated methods, choose Tools | Templates.
+        this.date = date;
     }
 
     public String getName() {
@@ -33,4 +35,13 @@ public class Vaccine {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
 }
