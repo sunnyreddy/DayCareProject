@@ -14,7 +14,6 @@ public class Person {
     private int age;
     private String firstName;
     private String lastName;
-    private String description;
 
     public Person(String personId, int age, String firstName, String lastName) {
         super();
