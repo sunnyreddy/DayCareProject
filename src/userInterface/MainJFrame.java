@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userInterface.Admin.AdminWorkAreaJPanel;
 import userInterface.Customer.ManageCustomerWorkAreaPanel;
 
 import userInterface.Employee.EmployeeWorkAreaJPanel;
@@ -229,11 +230,11 @@ public class MainJFrame extends javax.swing.JFrame {
         boolean flag = false;
         if(userName.equals("admin") && password.equals("admin"))
         {
-//            flag = true;
-//            AdminWorkAreaJPanel employeePanel = new AdminWorkAreaJPanel(userProcessContainer);
-//            userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
-//            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-//            layout.next(userProcessContainer);
+            flag = true;
+            AdminWorkAreaJPanel employeePanel = new AdminWorkAreaJPanel(userProcessContainer);
+            userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
+            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         }
         else {
             for(Customer cus :customer.getDetails()){
