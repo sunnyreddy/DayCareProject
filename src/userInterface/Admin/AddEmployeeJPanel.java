@@ -274,8 +274,9 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
             DB db = mongoClient.getDB("TestDB");
             DBCollection userCollection = db.getCollection("Employees");
             BasicDBObject b1 = new BasicDBObject();
-//            int count = (int)userCollection.count();
-            b1.put("id",id);
+            int count = (int)userCollection.count();
+            String emp_id = "E00"+count;
+            b1.put("_id",emp_id);
             b1.put("firstName", emp_fname);
             b1.put("lastName", emp_lname);
             b1.put("userName", userName);

@@ -190,7 +190,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
          while(cursor.hasNext()){
              Object[] row = new Object[model.getColumnCount()];
              DBObject obj = cursor.next();
-             row[0] = obj.get("id");
+             row[0] = obj.get("_id");
              row[1] = obj.get("firstName");
              row[2] = obj.get("age");
              row[3] = obj.get("EmployementDate");

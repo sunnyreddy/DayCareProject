@@ -32,7 +32,7 @@ public class UpdateEmployeeJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.obj = obj;
-         setData();
+        setData();
     }
 
     /**
@@ -63,6 +63,8 @@ public class UpdateEmployeeJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         txtInAge = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+
+        txtId.setEditable(false);
 
         jLabel2.setText("First Name");
 
@@ -203,7 +205,7 @@ public class UpdateEmployeeJPanel extends javax.swing.JPanel {
 
     
     public void setData(){
-        txtId.setText(obj.get("id").toString());
+        txtId.setText(obj.get("_id").toString());
         txtInAge.setText(obj.get("age").toString());
         txtInDate.setText(obj.get("EmployementDate").toString());
         txtInFirstName.setText(obj.get("firstName").toString());
@@ -222,7 +224,7 @@ public class UpdateEmployeeJPanel extends javax.swing.JPanel {
         int age = Integer.parseInt(txtInAge.getText());
         String empl_Date = txtInDate.getText();
 //        Date date = new Date(empl_Date);
-        int id = Integer.parseInt(txtId.getText());
+//        int id = Integer.parseInt(txtId.getText());
         int salary = Integer.parseInt(txtSalary.getText());
         
          MongoClient mongoClient = new MongoClient("localhost", 27017); 
@@ -232,7 +234,7 @@ public class UpdateEmployeeJPanel extends javax.swing.JPanel {
          cursor = userCollection.find();
         try {
             BasicDBObject newObj = new BasicDBObject();
-            newObj.put("_id",id);
+            newObj.put("_id", this.obj.get("_id"));
             newObj.put("firstName", emp_fname);
             newObj.put("lastName", emp_lname);
             newObj.put("userName", userName);
