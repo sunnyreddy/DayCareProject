@@ -37,13 +37,14 @@ public class EmployeeDirectory {
             String personId = obj.get("_id").toString();
             String firstName = obj.get("firstName").toString();
             String lastName = obj.get("lastName").toString();
-            String regDate = (String)obj.get("EmployementDate");
+            String regDate = obj.get("EmployementDate").toString();
             Date rDate = new Date(regDate);
             String userName = obj.get("userName").toString();
             String password = obj.get("password").toString();
             int age =  (int)obj.get("age");
             int salary = (int)obj.get("Salary");
-            Employee emp= new Employee(personId,age,firstName,lastName,rDate,salary,userName,password);
+            String saltValue = obj.get("Saltvalue")!=null?obj.get("Saltvalue").toString():PasswordUtils.getSalt(30);
+            Employee emp= new Employee(personId,age,firstName,lastName,rDate,salary,userName,password, saltValue);
             empDetails.add(emp);
         }
         return empDetails;

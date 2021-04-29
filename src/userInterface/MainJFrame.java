@@ -255,7 +255,8 @@ public class MainJFrame extends javax.swing.JFrame {
             }
             
             for(Employee emp : empDir.getAllEmployeesDetails()){
-                if(userName.equals(emp.getUserName()) && password.equals(emp.getPassword()))
+                boolean passwordMatch = PasswordUtils.verifyUserPassword(password, emp.getPassword(), emp.getSaltValue());
+                if(userName.equals(emp.getUserName()) && passwordMatch)
                 {
                     flag = true;
                     EmployeeWorkAreaJPanel employeePanel = new EmployeeWorkAreaJPanel(userProcessContainer, emp);

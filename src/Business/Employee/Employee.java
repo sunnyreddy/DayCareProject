@@ -17,18 +17,19 @@ public class Employee extends Person {
     private String password;
     private Date employedDate;
     private int salary;
-    
+    private String saltValue;
     public Employee(String personId, int age, String firstName, String lastName) {
         super(personId, age, firstName, lastName);
     }
     
-    public Employee(String personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password) {
+    public Employee(String personId, int age, String firstName, String lastName, Date employedDate, int salary, String userName, String password,String saltValue) {
 
         super(personId, age, firstName, lastName);
         this.employedDate = employedDate;
         this.salary = salary;
         this.userName = userName;
         this.password = password;
+        this.saltValue = saltValue;
     }
 
     public String getPassword() {
@@ -62,5 +63,14 @@ public class Employee extends Person {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
+    public String getSaltValue() {
+        return saltValue;
+    }
+
+    public void setSaltValue(String saltValue) {
+        this.saltValue = saltValue;
+    }
+    
     
 }

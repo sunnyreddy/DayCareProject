@@ -285,6 +285,7 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
             b1.put("age", age);
             b1.put("EmployementDate", date);
             b1.put("Salary", salary);
+            b1.put("Saltvalue", salt);
             userCollection.insert(b1);
             JOptionPane.showMessageDialog(null, "Created Account for Employee Successfully");
         } catch (Exception e) {
