@@ -37,7 +37,7 @@ public class EmployeeDirectory {
             String personId = obj.get("_id").toString();
             String firstName = obj.get("firstName").toString();
             String lastName = obj.get("lastName").toString();
-            Date regDate = (Date)obj.get("registrationDate");
+            Date regDate = (Date)obj.get("EmployementDate");
             String userName = obj.get("userName").toString();
             String password = obj.get("password").toString();
             int age =  (int)obj.get("age");

@@ -253,7 +253,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 if(userName.equals(emp.getUserName()) && password.equals(emp.getPassword()))
                 {
                     flag = true;
-                    EmployeeWorkAreaJPanel employeePanel = new EmployeeWorkAreaJPanel(userProcessContainer);
+                    EmployeeWorkAreaJPanel employeePanel = new EmployeeWorkAreaJPanel(userProcessContainer, emp);
                     userProcessContainer.add("employeeWorkAreaJPanel", employeePanel);
                     CardLayout layout=(CardLayout)userProcessContainer.getLayout();
                     layout.next(userProcessContainer);
