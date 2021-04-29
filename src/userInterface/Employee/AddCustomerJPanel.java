@@ -384,6 +384,7 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             DBCollection userCollection = db.getCollection("Customers");
             BasicDBObject bO = new BasicDBObject();
             int count = (int)userCollection.count();
+            count++;
             String cus_id = "C00"+count;
             bO.put("_id",cus_id);
             bO.put("firstName", cust_fname);
