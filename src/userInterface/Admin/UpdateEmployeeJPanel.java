@@ -230,17 +230,17 @@ public class UpdateEmployeeJPanel extends javax.swing.JPanel {
          DBCollection userCollection = db.getCollection("Employees");
          DBCursor cursor = null;
          cursor = userCollection.find();
-
         try {
-            obj.put("_id",id);
-            obj.put("firstName", emp_fname);
-            obj.put("lastName", emp_lname);
-            obj.put("userName", userName);
-            obj.put("password", password);
-            obj.put("age", age);
-            obj.put("EmployementDate", empl_Date);
-            obj.put("Salary", salary);
-            userCollection.insert(obj);
+            BasicDBObject newObj = new BasicDBObject();
+            newObj.put("_id",id);
+            newObj.put("firstName", emp_fname);
+            newObj.put("lastName", emp_lname);
+            newObj.put("userName", userName);
+            newObj.put("password", password);
+            newObj.put("age", age);
+            newObj.put("EmployementDate", empl_Date);
+            newObj.put("Salary", salary);
+            userCollection.update(this.obj, newObj);
             JOptionPane.showMessageDialog(null, "Updated Account for Employee Successfully");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Failed to add Try Again");
